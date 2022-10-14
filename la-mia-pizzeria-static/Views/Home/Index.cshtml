@@ -1,24 +1,22 @@
 ﻿
-@model List<Pizza>
-
 <div class="text-center">
     <h1 class="display-4">La mia Pizzeria</h1>
 </div>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     axios.get('/api/pizza/get').then(el => {
         console.log('risultato ok', el);
 
         if (el.data.length == 0) {
-            document.querySelector('.js_no_post').classList.remove('d-none');
-            document.querySelector('.js_post_table').classList.add('d-none');
+            document.querySelector('.js_no_pizza').classList.remove('d-none');
+            document.querySelector('.js_pizza_table').classList.add('d-none');
         } else {
-            document.querySelector('.js_post_table').classList.remove('d-none');
-            document.querySelector('.js_no_post').classList.add('d-none');
-            document.querySelector('.js_post_table').innerHTML = '';
-            el.data.forEach(post => {
+            document.querySelector('.js_pizza_table').classList.remove('d-none');
+            document.querySelector('.js_no_pizza').classList.add('d-none');
+            document.querySelector('.js_pizza_table').innerHTML = '';
+            el.data.forEach(pizza => {
                 console.log('pizza', pizza);
-                document.querySelector('.js_post_table').innerHTML +=
+                document.querySelector('.js_pizza_table').innerHTML +=
                     `
                                                         <div class="col-12 col-md-4 p-2">
                                     <div class="card post h-100">
@@ -34,6 +32,17 @@
         }
     }).catch(err => {
         console.log("error", err);
-  
     });
+</script>*@
+
+<script type="text/javascript">
+    let pizzas;
+    axios.get("api/pizza/get")
+        .then(response => {
+            pizzas = response.data;
+            console.log(pizzas);
+        })
+        .catch(error => {
+            console.log(error);
+        });
 </script>

@@ -7,18 +7,16 @@ namespace la_mia_pizzeria_crud_mvc.Controllers.Api
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class PostContoller : ControllerBase
+    public class PizzaContoller : ControllerBase
     {
         PizzaContext context;
-        public PostContoller()
+        public PizzaContoller()
         {
             context = new PizzaContext();
         }
         public IActionResult Get()
         {
-
             List<Pizza> pizzas = context.Pizzas.ToList();
-
             return Ok(pizzas);
         }
     }
