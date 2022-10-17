@@ -3,39 +3,39 @@
     <h1 class="display-4">La mia Pizzeria</h1>
 </div>
 
-@*<script type="text/javascript">
-    axios.get('/api/pizza/get').then(el => {
+<script type="text/javascript">
+    axios.get("https://localhost:7063/api/pizza/get").then(el => {
         console.log('risultato ok', el);
 
-        if (el.data.length == 0) {
-            document.querySelector('.js_no_pizza').classList.remove('d-none');
-            document.querySelector('.js_pizza_table').classList.add('d-none');
-        } else {
-            document.querySelector('.js_pizza_table').classList.remove('d-none');
-            document.querySelector('.js_no_pizza').classList.add('d-none');
-            document.querySelector('.js_pizza_table').innerHTML = '';
-            el.data.forEach(pizza => {
-                console.log('pizza', pizza);
-                document.querySelector('.js_pizza_table').innerHTML +=
-                    `
-                                                        <div class="col-12 col-md-4 p-2">
-                                    <div class="card post h-100">
-                                      <img src="${pizza.Photo}" class="card-img-top" alt="...">
-                                      <div class="card-body">
-                                            <h5 class="card-title">${pizza.Name}</h5>
-                                            <p class="card-text">${pizza.Description}</p>
-                                      </div>
-                                    </div>
-                                </div>
-                                `;
-            });
-        }
+        //if (el.data.length == 0) {
+        //    document.querySelector('.js_no_pizza').classList.remove('d-none');
+        //    document.querySelector('.js_pizza_table').classList.add('d-none');
+        //} else {
+        //    document.querySelector('.js_pizza_table').classList.remove('d-none');
+        //    document.querySelector('.js_no_pizza').classList.add('d-none');
+        //    document.querySelector('.js_pizza_table').innerHTML = '';
+        //    el.data.forEach(pizza => {
+        //        console.log('pizza', pizza);
+        //        document.querySelector('.js_pizza_table').innerHTML +=
+        //            `
+        //                                                <div class="col-12 col-md-4 p-2">
+        //                            <div class="card post h-100">
+        //                              <img src="${pizza.Photo}" class="card-img-top" alt="...">
+        //                              <div class="card-body">
+        //                                    <h5 class="card-title">${pizza.Name}</h5>
+        //                                    <p class="card-text">${pizza.Description}</p>
+        //                              </div>
+        //                            </div>
+        //                        </div>
+        //                        `;
+        //    });
+        //}
     }).catch(err => {
         console.log("error", err);
     });
-</script>*@
+</script>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     let pizzas;
     axios.get("api/pizza/get")
         .then(response => {
@@ -45,4 +45,4 @@
         .catch(error => {
             console.log(error);
         });
-</script>
+</script>*@
