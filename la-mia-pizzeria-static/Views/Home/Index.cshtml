@@ -1,48 +1,60 @@
 ﻿
 <div class="text-center">
     <h1 class="display-4">La mia Pizzeria</h1>
+    <div>
+        <input type="text" class="js_search form-control" placeholder="Cerca la tua pizza">
+    </div>
+    <div class="row js_no_post text-center d-none">
+        <div class="col-12">
+            <h3>Non hai ricercato nulla</h3>
+        </div>
+    </div>
+    <div class="row js_post_table d-none">
+    </div>
 </div>
 
 <script type="text/javascript">
-    axios.get("https://localhost:7063/api/pizza/get").then(el => {
-        console.log('risultato ok', el);
 
-        //if (el.data.length == 0) {
-        //    document.querySelector('.js_no_pizza').classList.remove('d-none');
-        //    document.querySelector('.js_pizza_table').classList.add('d-none');
-        //} else {
-        //    document.querySelector('.js_pizza_table').classList.remove('d-none');
-        //    document.querySelector('.js_no_pizza').classList.add('d-none');
-        //    document.querySelector('.js_pizza_table').innerHTML = '';
-        //    el.data.forEach(pizza => {
-        //        console.log('pizza', pizza);
-        //        document.querySelector('.js_pizza_table').innerHTML +=
-        //            `
-        //                                                <div class="col-12 col-md-4 p-2">
-        //                            <div class="card post h-100">
-        //                              <img src="${pizza.Photo}" class="card-img-top" alt="...">
-        //                              <div class="card-body">
-        //                                    <h5 class="card-title">${pizza.Name}</h5>
-        //                                    <p class="card-text">${pizza.Description}</p>
-        //                              </div>
-        //                            </div>
-        //                        </div>
-        //                        `;
-        //    });
-        //}
-    }).catch(err => {
-        console.log("error", err);
-    });
+        getPost("");
+        document.querySelector(".js_search").addEventListener('keyup', searchPost);
+
+        function searchPost() {
+            let name = this.value;
+            getPost(name);
+        }
+        function getPost(name) {
+            axios.get('/api/pizza/get', {
+                params: {
+                    name: name
+                }
+            }).then(res => {
+                if (res.data.length == 0) {
+                    document.querySelector('.js_no_pizza').classList.remove('d-none');
+                    document.querySelector('.js_pizza_table').classList.add('d-none');
+                } else {
+                    document.querySelector('.js_pizza_table').classList.remove('d-none');
+                    document.querySelector('.js_no_pizza').classList.add('d-none');
+                    document.querySelector('.js_pizza_table').innerHTML = '';
+                    res.data.forEach(pizza => {
+                        document.querySelector('.js_pizza_table').innerHTML +=
+                            `
+                                                            <div class="col-12 col-md-4 p-2">
+                                        <div class="card post h-100">
+                                                <a href="/Home/Details/${pizza.PizzaID}">
+                                              <img src="${pizza.Photo}" class="card-img-top" alt="...">
+                                              <div class="card-body">
+                                                <h5 class="card-title">${pizza.Name}</h5>
+                                                <p class="card-text">${pizza.Description}</p>
+                                              </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    `;
+                    });
+                }
+            }).catch(err => {
+                console.log("error", err);
+        }
+
 </script>
 
-@*<script type="text/javascript">
-    let pizzas;
-    axios.get("api/pizza/get")
-        .then(response => {
-            pizzas = response.data;
-            console.log(pizzas);
-        })
-        .catch(error => {
-            console.log(error);
-        });
-</script>*@
