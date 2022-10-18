@@ -1,4 +1,5 @@
 ﻿using la_mia_pizzeria_crud_mvc.Data;
+using la_mia_pizzeria_crud_mvc.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
