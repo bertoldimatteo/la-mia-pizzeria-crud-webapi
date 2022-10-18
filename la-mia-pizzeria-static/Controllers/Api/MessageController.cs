@@ -9,5 +9,15 @@ namespace la_mia_pizzeria_crud_mvc.Controllers.Api
     [ApiController]
     public class MessageController : ControllerBase
     {
+        [HttpPost]
+        public IActionResult Send([FromBody] Message message)
+        {
+            PizzaContext context = new PizzaContext();
+
+            context.Messages.Add(message);
+            context.SaveChanges();
+
+            return Ok();
+        }
     }
 }
