@@ -6,23 +6,31 @@ namespace la_mia_pizzeria_crud_mvc.Models
     {
         private static List<Pizza> Pizzas = new List<Pizza>();
 
-        public void Create(Pizza pizza, List<string> SelectedIngredient)
+        public void Create(Pizza pizza)
         {
             pizza.PizzaID = Pizzas.Count;
-
-            pizza.Categories = new List<Category>();
 
             InMemoryPizza.Pizzas.Add(pizza);
         }
 
-        public void Create(Pizza pizza)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Delete(Pizza pizza)
         {
-            throw new NotImplementedException();
+            int DeletePizza = -1;
+
+            for(int i = 0; i < InMemoryPizza.Pizzas.Count; i++)
+            {
+                Pizza checkPizza = InMemoryPizza.Pizzas[i];
+
+                if(checkPizza.PizzaID == pizza.PizzaID)
+                {
+                    DeletePizza = i;
+                }
+            }
+
+            if(DeletePizza != -1)
+            {
+                InMemoryPizza.Pizzas.RemoveAt(DeletePizza);
+            }
         }
 
         public Pizza GetById(int id)
