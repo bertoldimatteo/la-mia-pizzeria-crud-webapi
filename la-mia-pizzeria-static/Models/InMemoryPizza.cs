@@ -35,22 +35,56 @@ namespace la_mia_pizzeria_crud_mvc.Models
 
         public Pizza GetById(int id)
         {
-            throw new NotImplementedException();
+            Pizza findPizza = null;
+
+            for(int i = 0; i < InMemoryPizza.Pizzas.Count; i++)
+            {
+                Pizza pizzaCheck = InMemoryPizza.Pizzas[i];
+
+                if(pizzaCheck.PizzaID == id)
+                {
+                    findPizza = pizzaCheck;
+                }
+            }
+
+            return findPizza;
         }
 
         public List<Pizza> GetList()
         {
-            throw new NotImplementedException();
+            return InMemoryPizza.Pizzas;
         }
 
         public List<Pizza> GetListByFilter(string search)
         {
-            throw new NotImplementedException();
+            List<Pizza> pizzas = InMemoryPizza.Pizzas;
+
+            if(search != null)
+            {
+                pizzas = pizzas.Where(pizza => pizza.Name.ToLower().Contains(search.ToLower())).ToList();
+            }
+
+            return pizzas.ToList();
         }
 
         public void Update(Pizza pizza)
         {
-            throw new NotImplementedException();
+            int count = -1;
+
+            for(int i = 0; i < InMemoryPizza.Pizzas.Count; i++)
+            {
+                Pizza pizzaCheck = InMemoryPizza.Pizzas[i];
+
+                if(pizzaCheck.PizzaID == pizza.PizzaID)
+                {
+                    count = i;
+                }
+            }
+
+            if (count != -1)
+            {
+            InMemoryPizza.Pizzas[count] = pizza;
+            }
         }
     }
 }
